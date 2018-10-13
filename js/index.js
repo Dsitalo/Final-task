@@ -58,8 +58,8 @@ window.onload=function(){
           if (cityList.indexOf(forecast.name) === -1) {
             var blockGps = document.createElement('div');
             var divClose = document.createElement('div');
-            divClose.className = 'blockClose';
-            blockGps.className = 'customBlock';
+            divClose.className = 'blockClose' + ' ' + forecast.name;
+            blockGps.className = 'customBlock' + forecast.name;
             blockGps.innerHTML = '<p class="city" >' + forecast.name + '</p>'  + Math.floor(forecast.main.temp - 273.15, -1) + ' ℃' + '</br>' + forecast.wind.speed + " " + "m/sec" + ", " + forecast.wind.deg + " " + "degrees" + '</br>'
             document.getElementById('section').appendChild(blockGps);
             blockGps.appendChild(divClose);
