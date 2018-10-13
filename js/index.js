@@ -1,5 +1,5 @@
 
-/*$( document ).ready( function() {
+$( document ).ready( function() {
 
     navigator.geolocation.getCurrentPosition(function(position) {
 
@@ -30,7 +30,7 @@
       }
       getWeather();
     });
-});*/
+});
 
 
 var cityList = [];
@@ -40,6 +40,7 @@ window.onload=function(){
   var svg = document.getElementById("svg_search");
   var body = document.body;
   var section = document.getElementById("section");
+
   $("svg").on('click', function() {
     function getNewForecast() {
       var weather_url;
@@ -67,6 +68,9 @@ window.onload=function(){
             blockGps.appendChild(divClose);
             p.innerHTML = '';
             cityList.push(forecast.name);
+            divClose.addEventListener('click', delBlock);
+            
+              
           } else {
             p.innerHTML = 'City has been already chosen';
           }
@@ -75,6 +79,14 @@ window.onload=function(){
           
           p.innerHTML = 'wrong city name';
           }
+          
+          function delBlock (e) { 
+            var id = e.target.id; 
+            document.getElementById(id).remove();
+            delete cityList[cityList.indexOf(id)];
+
+            id = '';
+          };
           }
           }
           getWeather();
@@ -83,33 +95,6 @@ window.onload=function(){
 
       nameCity.value = '';
 });
-
-
-  /*function getNewForecast() {
-    var weather_url;
-        weather_url = "http://api.openweathermap.org/data/2.5/weather?q=" + input.value + "&APPID=24f8fb07c213c7208232c72e84a663c0";
-        localStorage.setItem(input.value, weather_url);
-  
-        function getWeather() {
-        var xttp = new XMLHttpRequest();
-        xttp.open("get",localStorage.getItem(input.value));
-        xttp.send();
-        xttp.onreadystatechange = function() {
-          if (xttp.readyState == 4 && xttp.status ==  200) {
-            var forecast = JSON.parse(xttp.responseText);
-  
-  }*/
-
 }
-
-
-
-/*
-var clickCount = +$(this).data("clickcount");
-    if (!clickCount)
-    clickCount = 1;
-    localStorage.setItem('name'+ clickCount++, nameCity.value);
-    $(this).data("clickcount", clickCount)
-*/
 
 
