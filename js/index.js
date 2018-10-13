@@ -1,4 +1,3 @@
-
 $( document ).ready( function() {
 
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -20,7 +19,6 @@ $( document ).ready( function() {
       xttp.onreadystatechange = function() {
         if (xttp.readyState == 4 && xttp.status ==  200) {
           var forecast = JSON.parse(xttp.responseText);
-
           divMainCity.innerHTML = forecast.name;
           divMainTemperature.innerHTML = Math.floor(forecast.main.temp - 273.15, -1) + " ℃";
           divMainWind.innerHTML = forecast.wind.speed + " " + "m/sec" + ", " + forecast.wind.deg + " " + "degrees" 
@@ -47,7 +45,7 @@ window.onload=function(){
       weather_url = "http://api.openweathermap.org/data/2.5/weather?q=" + input.value + "&APPID=24f8fb07c213c7208232c72e84a663c0";
       localStorage.setItem(nameCity.value, weather_url);
 
-        function getWeather() {
+        function getNewWeather() {
           var p = document.getElementById("p-message");
           var xttp = new XMLHttpRequest();
           xttp.open("get",localStorage.getItem(nameCity.value));
@@ -68,28 +66,22 @@ window.onload=function(){
             blockGps.appendChild(divClose);
             p.innerHTML = '';
             cityList.push(forecast.name);
-            divClose.addEventListener('click', delBlock);
-            
-              
+            divClose.addEventListener('click', delBlock); 
           } else {
             p.innerHTML = 'City has been already chosen';
           }
-          
           } else {
-          
           p.innerHTML = 'wrong city name';
           }
-          
           function delBlock (e) { 
             var id = e.target.id; 
             document.getElementById(id).remove();
             delete cityList[cityList.indexOf(id)];
-
             id = '';
           };
           }
           }
-          getWeather();
+          getNewWeather();
           }
         getNewForecast();
 
